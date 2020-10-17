@@ -31,7 +31,7 @@ defmodule Scenic.Cache.Static.Texture do
 
   ## Scope
 
-  When a texture term is loaded into the cache, it is assigned a scope. 
+  When a texture term is loaded into the cache, it is assigned a scope.
   The scope is used to
   determine how long to hold the asset in memory before it is unloaded. Scope is either
   the atom `:global`, or a `pid`.
@@ -60,7 +60,7 @@ defmodule Scenic.Cache.Static.Texture do
   ## Hashes
 
   At its simplest, accessing the cache is a key-value store. This cache is meant to be
-  static in nature, so the key is be a hash of the data.
+  static in nature, so the key is a hash of the data.
 
   Why? Read below...
 
@@ -73,14 +73,15 @@ defmodule Scenic.Cache.Static.Texture do
   asset will not cause an error in the C code that interprets it. Again - these are complicated
   and the renderer needs to be fast...
 
-  The solution is to compute a SHA hash of these files during build-time of your
-  and to store the result in your applications code itself. Then during run time, you 
-  compare then pre-computed hash against the run-time of the asset being loaded.
+  The solution is to compute a SHA hash of these files during build-time of your project
+  and to store the result in your application's code itself (using a module attribute). Then
+  during run time, you compare then pre-computed hash against the run-time of the asset being
+  loaded.
 
   Please take advantage of the helper modules `Cache.Support.File` and `Cache.Support.Hash` to
-  build the hashes. 
+  build the hashes.
 
-  These scheme is much stronger when the application code itself is also signed and
+  This scheme is much stronger when the application code itself is also signed and
   verified, but that is an exercise for the packaging tools.
 
   Full Example:
